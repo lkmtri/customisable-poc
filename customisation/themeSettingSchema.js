@@ -9,10 +9,6 @@ export default [
         content: 'Headings and buttons'
       },
       {
-        type: 'text',
-        id: 'font_size'
-      },
-      {
         type: 'select',
         id: C.typographyHeaderFamily,
         label: 'Heading Font',
