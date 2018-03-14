@@ -1,8 +1,10 @@
 import React from 'react'
 import { ThemeProvider } from 'styled-components'
 import withRedux from 'decorators/withRedux'
+import { getPageSections } from 'tools/customisation'
 import { actions, storeKeys } from 'redux-store'
 import FrameConnector from 'containers/FrameConnector'
+import Section from 'containers/Section'
 
 const createPage = (PageComponent) =>
   class Page extends React.PureComponent {
@@ -22,10 +24,16 @@ const createPage = (PageComponent) =>
 
     render () {
       const { customisation } = this.props
+      const { sectionSettings, themeSettings } = customisation
+      // console.log(customisation)
+      // console.log(getPageSections(PageComponent.pageName, sectionSettings))
       return (
-        <ThemeProvider theme={customisation}>
+        <ThemeProvider theme={themeSettings}>
           <FrameConnector>
-            <PageComponent {...this.props} />
+            {getPageSections(PageComponent.pageName, sectionSettings).map(section => {
+              const SectionComponent = Section[section.type]
+              return <SectionComponent key={section.key} {...section.settings} />
+            })}
           </FrameConnector>
         </ThemeProvider>
       )

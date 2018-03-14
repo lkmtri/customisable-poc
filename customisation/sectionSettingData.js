@@ -20,7 +20,7 @@ const sectionSettingData = {
     }
   },
   pages: {
-    index: ['hero', 'slideshow']
+    index: ['header']
   }
 }
 

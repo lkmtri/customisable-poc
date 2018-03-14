@@ -1,4 +1,4 @@
-import * as C from 'theme/themeConstants'
+import * as C from './themeConstants'
 
 export default [
   {

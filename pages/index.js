@@ -15,7 +15,7 @@ class Index extends React.PureComponent {
   render () {
     return (
       <PageContainer>
-        <Section.Header />
+        <Section.header />
       </PageContainer>
     )
   }

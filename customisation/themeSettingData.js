@@ -1,6 +1,6 @@
-import * as C from 'theme/themeConstants'
+import * as C from './themeConstants'
 
-export const themeSettingData = {
+const themeSettingData = {
   current: {
     color_text: '#3d4246',
     color_body_text: '#788188',
@@ -26,3 +26,5 @@ export const themeSettingData = {
     light: {}
   }
 }
+
+export default themeSettingData

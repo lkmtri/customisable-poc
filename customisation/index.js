@@ -1,3 +1,3 @@
-export { default as sectionSettingSchema } from 'theme/sectionSettingSchema'
+export { default as sectionSettingSchema } from './sectionSettingSchema'
 
-export { default as themeSettingSchema } from 'theme/themeSettingSchema'
+export { default as themeSettingSchema } from './themeSettingSchema'

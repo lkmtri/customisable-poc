@@ -10,7 +10,7 @@ const connectedSectionComponent = sectionComponents.reduce(
     const mapDispatchToProps = (dispatch) => bindActionCreators(storeKeysToSubscribe.reduce((acc, storeKey) => ({ ...acc, ...actions[storeKey] }), {}), dispatch)
     return {
       ...acc,
-      [component.schema.name]: connect(mapStateToProps, mapDispatchToProps)(component)
+      [component.schema.type]: connect(mapStateToProps, mapDispatchToProps)(component)
     }
   }, {}
 )

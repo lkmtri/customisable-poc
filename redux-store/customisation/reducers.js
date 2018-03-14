@@ -1,9 +1,13 @@
+import sectionSettingData from 'customisation/sectionSettingData'
+import themeSettingData from 'customisation/themeSettingData'
 import {
   LOAD_THEME_AND_SECTION_SETTINGS,
   HOT_UPDATE_THEME_AND_SECTION_SETTINGS
 } from './constants'
 
 export const initialState = {
+  sectionSettings: sectionSettingData,
+  themeSettings: themeSettingData
 }
 
 export const reducers = (state = initialState, action) => {
