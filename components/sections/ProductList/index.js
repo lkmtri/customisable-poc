@@ -7,6 +7,7 @@ import schema from './schema'
 
 const StyledProductCard = styled(ProductCard)`
   width: 30%;
+  margin-bottom: 2rem;
 `
 
 const Container = styled(Section.Container)`
@@ -25,6 +26,9 @@ class ProductList extends React.PureComponent {
     return (
       <Section>
         <Container>
+          <StyledProductCard />
+          <StyledProductCard />
+          <StyledProductCard />
           <StyledProductCard />
           <StyledProductCard />
           <StyledProductCard />

@@ -2,11 +2,23 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { actions, storeKeys } from 'redux-store'
+import {
+  themeSettingSchema,
+  themeSettingData,
+  sectionSettingSchema,
+  sectionSettingData
+} from 'customisation'
 
 class FrameConnector extends React.PureComponent {
   componentDidMount () {
     if (window !== undefined) {
-      // console.log(this.props)
+      window.parent.postMessage({
+        themeSettingSchema,
+        themeSettingData,
+        sectionSettingSchema,
+        sectionSettingData
+      }, 'http://localhost:3000')
+
       window.addEventListener('message', function (event) {
         // dispatch(actions)
         console.log(event.data)
