@@ -6,7 +6,7 @@ import { actions, storeKeys } from 'redux-store'
 class FrameConnector extends React.PureComponent {
   componentDidMount () {
     if (window !== undefined) {
-      console.log(this.props)
+      // console.log(this.props)
       window.addEventListener('message', function (event) {
         // dispatch(actions)
         console.log(event.data)

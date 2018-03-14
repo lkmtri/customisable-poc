@@ -4,6 +4,7 @@ import { injectGlobal, ServerStyleSheet } from 'styled-components'
 
 injectGlobal`
   html, body {
+    background-color: white;
     margin: 0;
     overflow-x: hidden;
   }

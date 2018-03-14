@@ -17,10 +17,14 @@ const sectionSettingData = {
     footer: {
       type: 'footer',
       settings: {}
+    },
+    productList: {
+      type: 'product_list',
+      settings: {}
     }
   },
   pages: {
-    index: ['header']
+    index: ['header', 'productList', 'footer']
   }
 }
 
