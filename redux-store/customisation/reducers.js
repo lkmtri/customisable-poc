@@ -1,5 +1,4 @@
-import sectionSettingData from 'customisation/sectionSettingData'
-import themeSettingData from 'customisation/themeSettingData'
+import { sectionSettingData, themeSettingData } from 'theme-config'
 import {
   LOAD_THEME_AND_SECTION_SETTINGS,
   HOT_UPDATE_THEME_AND_SECTION_SETTINGS

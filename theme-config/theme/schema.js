@@ -1,4 +1,4 @@
-import * as C from './themeConstants'
+import * as C from './constants'
 
 export default [
   {
@@ -19,6 +19,27 @@ export default [
           { value: 'D', label: 'D', group: '3' },
           { value: 'E', label: 'E', group: '3' }
         ]
+      },
+      {
+        type: 'radio',
+        id: 'typoGraphyRadio',
+        label: 'Select an option',
+        default: ['A'],
+        options: [
+          { value: 'A', label: 'Option A' },
+          { value: 'B', label: 'Option B' },
+          { value: 'C', label: 'Option C' }
+        ]
+      },
+      {
+        type: 'range',
+        id: 'typoGraphyRange',
+        label: 'Select a value',
+        min: 0,
+        max: 55,
+        step: 5,
+        default: 5,
+        unit: 'px'
       },
       {
         type: 'select',

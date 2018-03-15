@@ -7,7 +7,7 @@ import {
   themeSettingData,
   sectionSettingSchema,
   sectionSettingData
-} from 'customisation'
+} from 'theme-config'
 
 class FrameConnector extends React.PureComponent {
   componentDidMount () {

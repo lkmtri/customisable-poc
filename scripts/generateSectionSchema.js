@@ -5,4 +5,6 @@ const sectionSettingSchema = Object.keys(sectionComponents).reduce((acc, key) =>
   return acc
 }, [])
 
+console.log(sectionSettingSchema)
+
 export default sectionSettingSchema
