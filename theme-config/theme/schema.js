@@ -9,6 +9,12 @@ export default [
         content: 'Headings and buttons'
       },
       {
+        type: 'text',
+        id: 'testing',
+        default: 'default value',
+        label: 'Some input'
+      },
+      {
         type: 'select',
         id: C.typographyHeaderFamily,
         label: 'Heading Font',
