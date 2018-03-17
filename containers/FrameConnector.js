@@ -1,7 +1,5 @@
 import React from 'react'
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { actions, storeKeys } from 'redux-store'
 import {
   themeSettingSchema,
   themeSettingData,
@@ -19,9 +17,10 @@ class FrameConnector extends React.PureComponent {
         sectionSettingData
       }, 'http://localhost:3000')
 
+      const { dispatch } = this.props
+
       window.addEventListener('message', function (event) {
-        // dispatch(actions)
-        console.log(event.data)
+        dispatch(event.data)
       })
     }
   }
@@ -31,6 +30,4 @@ class FrameConnector extends React.PureComponent {
   }
 }
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({ ...actions[storeKeys.customisation] }, dispatch)
-
-export default connect(null, mapDispatchToProps)(FrameConnector)
+export default connect()(FrameConnector)

@@ -64,11 +64,12 @@ export default [
     ],
     presets: {
       name: 'Testimonials',
-      blocks: [
-        { type: 'quote', id: 'quote_1' },
-        { type: 'quote', id: 'quote_2' },
-        { type: 'quote', id: 'quote_3' }
-      ]
+      blocks: {
+        quote_1: { type: 'quote' },
+        quote_2: { type: 'quote' },
+        quote_3: { type: 'quote' }
+      },
+      blocksOrder: ['quote_1', 'quote_2', 'quote_3']
     }
   },
   {

@@ -10,27 +10,25 @@ const createPage = (PageComponent) =>
   class Page extends React.PureComponent {
     // Load common resources for pages here
     static async getInitialProps (context) {
-      const pageInitialProps = typeof PageComponent.getInitialProps === 'function'
+      const initialProps = typeof PageComponent.getInitialProps === 'function'
         ? await PageComponent.getInitialProps(context)
         : {}
       // Load theme to the redux store
       await context.store.dispatch(actions[storeKeys.customisation].loadThemeAndSectionSettings())
       return {
-        ...pageInitialProps,
-        dispatch: context.store.dispatch,
-        customisation: context.store.getState()[storeKeys.customisation]
+        ...initialProps,
+        customisation: context.store.getState()[storeKeys.customisation].toJS()
       }
     }
 
     render () {
       const { customisation } = this.props
-      const { sectionSettings, themeSettings } = customisation
-      // console.log(customisation)
-      // console.log(getPageSections(PageComponent.pageName, sectionSettings))
+      const { sectionSettingData, themeSettingData } = customisation
+
       return (
-        <ThemeProvider theme={themeSettings}>
+        <ThemeProvider theme={themeSettingData}>
           <FrameConnector>
-            {getPageSections(PageComponent.pageName, sectionSettings).map(section => {
+            {getPageSections(PageComponent.pageName, sectionSettingData).map(section => {
               const SectionComponent = Section[section.type]
               return <SectionComponent key={section.key} {...section.settings} />
             })}
