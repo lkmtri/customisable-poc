@@ -30,7 +30,7 @@ const createPage = (PageComponent) =>
           <FrameConnector>
             {getPageSections(PageComponent.pageName, sectionSettingData).map(section => {
               const SectionComponent = Section[section.type]
-              return <SectionComponent key={section.key} {...section.settings} />
+              return <SectionComponent id={section.key} key={section.key} {...section.settings} />
             })}
           </FrameConnector>
         </ThemeProvider>

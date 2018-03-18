@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { storeKeys } from 'redux-store'
+// import { storeKeys } from 'redux-store'
 import Section from 'components/base/Section'
 import ProductCard from 'components/snippets/ProductCard'
 import schema from './schema'
@@ -19,8 +19,6 @@ const Container = styled(Section.Container)`
 
 class ProductList extends React.PureComponent {
   static schema = schema
-
-  static storeKeysToSubscribe = [ storeKeys.customisation ]
 
   render () {
     return (

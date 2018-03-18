@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import schema from './schema'
-import { storeKeys } from 'redux-store'
 import Section from 'components/base/Section'
 import { DisplayText, TextStyle } from 'components/base/Typo'
 
@@ -34,13 +33,14 @@ const HeaderMenuText = styled(TextStyle)`
 class Header extends React.PureComponent {
   static schema = schema
 
-  static storeKeysToSubscribe = [ storeKeys.customisation ]
+  static storeKeysToSubscribe = [ ]
 
   render () {
+    const { customisation } = this.props
     return (
       <StyledSection>
         <StyledSection.Container>
-          <Logo>LEGO</Logo>
+          <Logo>{customisation.settings.logo || 'LEGO'}</Logo>
           <HeaderMenu>
             <HeaderMenuText>Home</HeaderMenuText>
             <HeaderMenuText>Menu</HeaderMenuText>

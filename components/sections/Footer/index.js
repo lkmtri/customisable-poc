@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import { storeKeys } from 'redux-store'
 import Section from 'components/base/Section'
 import { TextStyle } from 'components/base/Typo'
 
@@ -29,7 +28,7 @@ const FooterMenuText = styled(TextStyle)`
 class Footer extends React.PureComponent {
   static schema = schema
 
-  static storeKeysToSubscribe = [ storeKeys.customisation ]
+  static storeKeysToSubscribe = [ ]
 
   render () {
     return (
