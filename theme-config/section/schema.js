@@ -85,13 +85,12 @@ export default [
     }
   },
   {
-    name: 'Testimonials',
-    category: 'Customer',
+    name: 'Testimonial',
     type: 'testimonial',
     settings: [
       {
         type: 'text',
-        id: 'title',
+        id: 'heading',
         label: 'Heading',
         default: 'Testimonials'
       }
@@ -102,29 +101,28 @@ export default [
         name: 'Testimonial',
         settings: [
           {
-            type: 'textarea',
-            id: 'content',
-            label: 'Content',
-            default: 'Great quality. Easy to use. Nice UI. Definitely made my life easier.'
-          },
-          {
             type: 'text',
             id: 'author',
-            label: 'Customer name',
-            default: 'John Albert'
+            default: 'Customer\'s name',
+            label: 'Customer\'s name'
+          },
+          {
+            type: 'textarea',
+            id: 'content',
+            default: 'Great product!',
+            label: 'Testimonial'
           }
         ]
       }
     ],
-    presets: [
-      {
-        name: 'Testimonials',
-        blocks: [
-          { type: 'quote' },
-          { type: 'quote' },
-          { type: 'quote' }
-        ]
-      }
-    ]
+    presets: {
+      name: 'Testimonial',
+      category: 'Customer',
+      blocks: [
+        { type: 'quote' },
+        { type: 'quote' },
+        { type: 'quote' }
+      ]
+    }
   }
 ]

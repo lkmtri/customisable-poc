@@ -32,6 +32,9 @@ class ProductList extends React.PureComponent {
           <StyledProductCard />
           <StyledProductCard />
           <StyledProductCard />
+          <StyledProductCard />
+          <StyledProductCard />
+          <StyledProductCard />
         </Container>
       </Section>
     )
