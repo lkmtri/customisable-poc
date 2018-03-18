@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { ThemeProvider } from 'styled-components'
+import FlipMove from 'react-flip-move'
 import withRedux from 'decorators/withRedux'
 import { getPageSections } from 'tools/customisation'
 import { actions, storeKeys } from 'redux-store'
@@ -33,10 +34,12 @@ const createPage = (PageComponent) =>
           <ThemeProvider theme={themeSettingData}>
             <FrameConnector>
               <HeaderSection id='header' {...sectionSettingData.sections.header.settings} />
-              {getPageSections(PageComponent.pageName, sectionSettingData).map(section => {
-                const SectionComponent = Section[section.type]
-                return <SectionComponent id={section.key} key={section.key} {...section.settings} />
-              })}
+              <FlipMove duration={350} easing='ease-out'>
+                {getPageSections(PageComponent.pageName, sectionSettingData).map(section => {
+                  const SectionComponent = Section[section.type]
+                  return <SectionComponent id={section.key} key={section.key} {...section.settings} />
+                })}
+              </FlipMove>
               <FooterSection id='footer' {...sectionSettingData.sections.footer.settings} />
             </FrameConnector>
           </ThemeProvider>
