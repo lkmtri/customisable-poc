@@ -27,6 +27,18 @@ export default [
     presets: {}
   },
   {
+    name: 'Banner Image',
+    type: 'banner_image',
+    settings: [
+      {
+        type: 'text',
+        id: 'image',
+        label: 'Upload an image'
+      }
+    ],
+    presets: {}
+  },
+  {
     name: 'Product List',
     category: 'Product',
     type: 'product_list',

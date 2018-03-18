@@ -32,10 +32,14 @@ const sectionSettingData = {
         }
       },
       blocksOrder: ['testimonial', 'testimonial_1']
+    },
+    bannerImage: {
+      type: 'banner_image',
+      settings: {}
     }
   },
   pages: {
-    index: ['header', 'productList', 'footer']
+    index: ['header', 'bannerImage', 'productList', 'footer']
   }
 }
 

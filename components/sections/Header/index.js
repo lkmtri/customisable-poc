@@ -40,7 +40,7 @@ class Header extends React.PureComponent {
     return (
       <StyledSection>
         <StyledSection.Container>
-          <Logo>{customisation.settings.logo || 'LEGO'}</Logo>
+          <Logo>{customisation.settings.logo || 'page'}</Logo>
           <HeaderMenu>
             <HeaderMenuText>Home</HeaderMenuText>
             <HeaderMenuText>Menu</HeaderMenuText>

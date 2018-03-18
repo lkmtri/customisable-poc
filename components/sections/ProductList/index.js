@@ -20,6 +20,8 @@ const Container = styled(Section.Container)`
 class ProductList extends React.PureComponent {
   static schema = schema
 
+  static storeKeysToSubscribe = [ ]
+
   render () {
     return (
       <Section>
