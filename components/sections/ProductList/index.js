@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 // import { storeKeys } from 'redux-store'
+import { media } from 'tools/styled'
 import Section from 'components/base/Section'
 import ProductCard from 'components/snippets/ProductCard'
 import schema from './schema'
@@ -8,6 +9,8 @@ import schema from './schema'
 const StyledProductCard = styled(ProductCard)`
   width: 30%;
   margin-bottom: 2rem;
+  transition: width 200ms ease-in-out;
+  ${media.mobile`width: 100%;`}
 `
 
 const Container = styled(Section.Container)`
@@ -26,9 +29,6 @@ class ProductList extends React.PureComponent {
     return (
       <Section>
         <Container>
-          <StyledProductCard />
-          <StyledProductCard />
-          <StyledProductCard />
           <StyledProductCard />
           <StyledProductCard />
           <StyledProductCard />
