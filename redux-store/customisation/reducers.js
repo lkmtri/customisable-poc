@@ -5,7 +5,8 @@ import {
   HOT_UPDATE_THEME_AND_SECTION_SETTINGS,
   UPDATE_THEME_SETTINGS,
   UPDATE_SECTIONS_SETTINGS,
-  UPDATE_SECTIONS_CONTENT
+  UPDATE_SECTIONS_CONTENT,
+  REORDER_SECTIONS
 } from './constants'
 
 export const initialState = fromJS({
@@ -29,6 +30,11 @@ export const reducers = (state = initialState, action) => {
         ['sectionSettingData', 'sections', action.payload.sectionId, 'blocks',
           action.payload.blockId, 'settings', action.payload.key],
         fromJS(action.payload.value)
+      )
+    case REORDER_SECTIONS:
+      return state.setIn(
+        ['sectionSettingData', 'pages', action.payload.page],
+        fromJS(action.payload.nextSectionsOrder)
       )
     case LOAD_THEME_AND_SECTION_SETTINGS:
       return state

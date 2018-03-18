@@ -39,7 +39,7 @@ const sectionSettingData = {
     }
   },
   pages: {
-    index: ['header', 'bannerImage', 'productList', 'footer']
+    index: ['bannerImage', 'productList']
   }
 }
 

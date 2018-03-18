@@ -13,7 +13,7 @@ const schema = {
       ]
     },
     {
-      type: 'image_picker',
+      type: 'text',
       id: 'logo',
       label: 'Logo image'
     }
