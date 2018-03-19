@@ -1,9 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import schema from './schema'
+import { media } from 'tools/styled'
+import Link from 'components/base/Link'
 import Section from 'components/base/Section'
 import { DisplayText, TextStyle } from 'components/base/Typo'
-import { media } from 'tools/styled'
+import schema from './schema'
 
 const StyledSection = styled(Section)`
   background-color: #39CCCC;
@@ -86,7 +87,7 @@ class Header extends React.PureComponent {
           <HeaderMenu>
             <HeaderMenuText>Home</HeaderMenuText>
             <HeaderMenuText>Menu</HeaderMenuText>
-            <HeaderMenuText>Promotions</HeaderMenuText>
+            <Link href='/promotion' as='promotion'><HeaderMenuText>Promotions</HeaderMenuText></Link>
             <HeaderMenuText>Store information</HeaderMenuText>
           </HeaderMenu>
           <HambugerMenu onClick={this.toggleMobileMenu} />
@@ -94,7 +95,7 @@ class Header extends React.PureComponent {
         <MobileMenu show={showMobileMenu}>
           <MobileMenuText>Home</MobileMenuText>
           <MobileMenuText>Menu</MobileMenuText>
-          <MobileMenuText>Promotions</MobileMenuText>
+          <Link href='/promotion'><MobileMenuText>Promotions</MobileMenuText></Link>
           <MobileMenuText>Store information</MobileMenuText>
         </MobileMenu>
       </StyledSection>

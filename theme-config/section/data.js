@@ -16,6 +16,10 @@ const sectionSettingData = {
       type: 'banner_image',
       settings: {}
     },
+    bannerImage_1: {
+      type: 'banner_image',
+      settings: {}
+    },
     testimonial: {
       type: 'testimonial',
       settings: {
@@ -54,7 +58,8 @@ const sectionSettingData = {
     }
   },
   pages: {
-    index: ['bannerImage', 'productList', 'testimonial']
+    index: ['bannerImage', 'productList', 'testimonial'],
+    promotion: ['bannerImage_1']
   }
 }
 
