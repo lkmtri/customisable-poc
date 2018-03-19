@@ -55,11 +55,65 @@ const sectionSettingData = {
         }
       },
       blocksOrder: ['testimonial', 'testimonial_1', 'testimonial_2']
+    },
+    promotion: {
+      type: 'promotion_list',
+      settings: {
+        heading: 'Promotions'
+      },
+      blocks: {
+        promotion: {
+          id: 'promotion',
+          name: 'Promotion',
+          type: 'promotion',
+          settings: {
+            title: 'Promotion 1',
+            content: '50% discount on selected items'
+          }
+        },
+        promotion1: {
+          id: 'promotion1',
+          name: 'Promotion',
+          type: 'promotion',
+          settings: {
+            title: 'Promotion 1',
+            content: '50% discount on selected items'
+          }
+        },
+        promotion2: {
+          id: 'promotion2',
+          name: 'Promotion',
+          type: 'promotion',
+          settings: {
+            title: 'Promotion 1',
+            content: '50% discount on selected items'
+          }
+        },
+        promotion3: {
+          id: 'promotion3',
+          name: 'Promotion',
+          type: 'promotion',
+          settings: {
+            title: 'Promotion 1',
+            content: '50% discount on selected items'
+          }
+        },
+        promotion4: {
+          id: 'promotion4',
+          name: 'Promotion',
+          type: 'promotion',
+          settings: {
+            title: 'Promotion 1',
+            content: '50% discount on selected items'
+          }
+        }
+      },
+      blocksOrder: ['promotion', 'promotion1', 'promotion2', 'promotion3', 'promotion4']
     }
   },
   pages: {
     index: ['bannerImage', 'productList', 'testimonial'],
-    promotion: ['bannerImage_1']
+    promotion: ['promotion', 'bannerImage_1']
   }
 }
 
