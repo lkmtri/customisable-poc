@@ -85,17 +85,25 @@ class Header extends React.PureComponent {
         <StyledSection.Container>
           <Logo>{customisation.settings.logo || 'page'}</Logo>
           <HeaderMenu>
-            <HeaderMenuText>Home</HeaderMenuText>
+            <Link href='/' as='index'>
+              <HeaderMenuText>Home</HeaderMenuText>
+            </Link>
             <HeaderMenuText>Menu</HeaderMenuText>
-            <Link href='/promotion' as='promotion'><HeaderMenuText>Promotions</HeaderMenuText></Link>
+            <Link href='/promotion' as='promotion'>
+              <HeaderMenuText>Promotions</HeaderMenuText>
+            </Link>
             <HeaderMenuText>Store information</HeaderMenuText>
           </HeaderMenu>
           <HambugerMenu onClick={this.toggleMobileMenu} />
         </StyledSection.Container>
         <MobileMenu show={showMobileMenu}>
-          <MobileMenuText>Home</MobileMenuText>
+          <Link href='/' as='index'>
+            <MobileMenuText>Home</MobileMenuText>
+          </Link>
           <MobileMenuText>Menu</MobileMenuText>
-          <Link href='/promotion'><MobileMenuText>Promotions</MobileMenuText></Link>
+          <Link href='/promotion'>
+            <MobileMenuText>Promotions</MobileMenuText>
+          </Link>
           <MobileMenuText>Store information</MobileMenuText>
         </MobileMenu>
       </StyledSection>
