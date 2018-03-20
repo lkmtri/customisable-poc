@@ -3,12 +3,22 @@ import { Router } from 'routes'
 
 class Link extends React.PureComponent {
   static defaultProps = {
-    onClick: () => {}
+    onClick: () => {},
+    query: {}
+  }
+
+  constructUrl = () => {
+    const { href, query } = this.props
+    const queries = Object.keys(query)
+    return queries.length === 0
+      ? href
+      : queries.reduce((acc, key, idx) => `${acc}${idx !== 0 ? '&' : ''}${key}=${query[key]}`, `${href}?`)
   }
 
   handleOnClick = () => {
-    const { href, onClick } = this.props
-    Router.pushRoute(href)
+    const { onClick } = this.props
+    const url = this.constructUrl()
+    Router.pushRoute(url)
     onClick()
   }
 
