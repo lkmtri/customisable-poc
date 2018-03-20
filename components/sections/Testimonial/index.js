@@ -46,7 +46,7 @@ class Testimonial extends React.PureComponent {
               const block = blocks[blockId]
               const data = block.settings
               return (
-                <TestimonialCard>
+                <TestimonialCard key={blockId}>
                   <Subheading>{data.author}</Subheading>
                   <TextStyle>{data.content}</TextStyle>
                 </TestimonialCard>

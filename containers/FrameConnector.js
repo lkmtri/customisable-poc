@@ -46,6 +46,7 @@ class FrameConnector extends React.PureComponent {
 
   sendMessageToParentFrame = (message) => {
     const { route } = this.props
+    console.log(route)
     if (route.preview && window !== undefined) {
       window.parent.postMessage(message, 'http://localhost:3000')
     }

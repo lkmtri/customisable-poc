@@ -28,14 +28,15 @@ const createPage = (PageComponent) =>
       }
 
       render () {
-        const { query, currentPage = 'index', customisation } = this.props
+        const { url, customisation } = this.props
         const { sectionSettingData, themeSettingData } = customisation
         const HeaderSection = Section.header
         const FooterSection = Section.footer
+        const currentPage = url.query.page || 'index'
 
         return (
           <ThemeProvider theme={themeSettingData}>
-            <RouterProvider query={query}>
+            <RouterProvider query={url.query}>
               <FrameConnector>
                 <HeaderSection id='header' {...sectionSettingData.sections.header.settings} />
                 <FlipMove duration={350} easing='ease-out'>

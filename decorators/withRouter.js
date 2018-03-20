@@ -9,7 +9,7 @@ class Route {
 
   setQuery (query) {
     this.query = query
-    this.subscriptions.forEach(f => f(this.query))
+    this.subscriptions.forEach(f => f(this))
   }
 
   subscribe (f) {

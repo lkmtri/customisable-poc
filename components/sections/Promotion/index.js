@@ -38,7 +38,7 @@ class Promotion extends React.PureComponent {
           {blocksOrder.map((blockId) => {
             const block = blocks[blockId]
             return (
-              <PromotionCard>
+              <PromotionCard key={blockId}>
                 <Subheading>{block.settings.title}</Subheading>
                 <TextStyle>{block.settings.content}</TextStyle>
               </PromotionCard>
