@@ -20,12 +20,13 @@ const createPage = (PageComponent) =>
         await context.store.dispatch(actions[storeKeys.customisation].loadThemeAndSectionSettings())
         return {
           ...initialProps,
+          currentPage: context.query.page,
           customisation: context.store.getState()[storeKeys.customisation].toJS()
         }
       }
 
       render () {
-        const { customisation } = this.props
+        const { currentPage = 'index', customisation } = this.props
         const { sectionSettingData, themeSettingData } = customisation
         const HeaderSection = Section.header
         const FooterSection = Section.footer
@@ -35,7 +36,7 @@ const createPage = (PageComponent) =>
             <FrameConnector>
               <HeaderSection id='header' {...sectionSettingData.sections.header.settings} />
               <FlipMove duration={350} easing='ease-out'>
-                {getPageSections(PageComponent.pageName, sectionSettingData).map(section => {
+                {getPageSections(currentPage, sectionSettingData).map(section => {
                   const SectionComponent = Section[section.type]
                   return <SectionComponent id={section.key} key={section.key} {...section.settings} />
                 })}

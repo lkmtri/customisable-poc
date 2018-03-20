@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Router from 'next/router'
+import { Router } from 'routes'
 import {
   themeSettingSchema,
   themeSettingData,
@@ -28,6 +28,7 @@ class FrameConnector extends React.PureComponent {
       })
 
       Router.onRouteChangeComplete = (url) => {
+        console.log(url)
         if (url.startsWith('/')) {
           url = url.substr(1)
           if (url === '') url = 'index'

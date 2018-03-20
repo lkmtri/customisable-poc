@@ -1,5 +1,5 @@
 import React from 'react'
-import Router from 'next/router'
+import { Router } from 'routes'
 
 class Link extends React.PureComponent {
   static defaultProps = {
@@ -7,8 +7,8 @@ class Link extends React.PureComponent {
   }
 
   handleOnClick = () => {
-    const { href, onClick, as = href } = this.props
-    Router.push(href, as)
+    const { href, onClick } = this.props
+    Router.pushRoute(href)
     onClick()
   }
 
