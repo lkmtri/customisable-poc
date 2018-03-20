@@ -55,7 +55,7 @@ export class RouterProvider extends React.PureComponent {
 }
 
 export default (WrappedComponent) =>
-  class RouterSubsription extends React.PureComponent {
+  class RouterSubsription extends React.Component {
     static contextTypes = {
       route: PropTypes.object
     }

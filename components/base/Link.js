@@ -16,19 +16,17 @@ class Link extends React.PureComponent {
   }
 
   handleOnClick = () => {
-    const { onClick } = this.props
     const url = this.constructUrl()
     Router.pushRoute(url)
-    onClick()
   }
 
   render () {
-    const props = { ...this.props }
-    props.onClick = this.handleOnClick
-
+    const { children } = this.props
+    const childrenWithProps = React.Children.map(children, child =>
+      React.cloneElement(child, { onClick: this.handleOnClick }))
     return (
       <React.Fragment>
-        {React.cloneElement(this.props.children, props)}
+        {childrenWithProps}
       </React.Fragment>
     )
   }

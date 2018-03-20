@@ -30,9 +30,10 @@ const HeaderMenu = styled.div`
 `
 
 const HeaderMenuText = styled(TextStyle)`
-  color: white;
   padding-left: 1rem;
   cursor: pointer;
+  color: ${props => props.highlight ? '#fff' : '#c9efde'};
+  ${media.mobile`margin: 0.3rem;`}
 `
 
 const HambugerMenu = styled.div`
@@ -61,10 +62,6 @@ const MobileMenu = styled.div`
   ${media.mobile`display: flex;`}
 `
 
-const MobileMenuText = styled(HeaderMenuText)`
-  margin: 0.3rem;
-`
-
 class Header extends React.PureComponent {
   static schema = schema
 
@@ -77,8 +74,9 @@ class Header extends React.PureComponent {
   toggleMobileMenu = () => this.setState({ showMobileMenu: !this.state.showMobileMenu })
 
   render () {
-    const { customisation } = this.props
+    const { customisation, route } = this.props
     const { showMobileMenu } = this.state
+    const { page = 'index' } = route
 
     return (
       <StyledSection>
@@ -86,25 +84,25 @@ class Header extends React.PureComponent {
           <Logo>{customisation.settings.logo || 'page'}</Logo>
           <HeaderMenu>
             <Link href='/'>
-              <HeaderMenuText>Home</HeaderMenuText>
+              <HeaderMenuText highlight={page === 'index'}>Home</HeaderMenuText>
             </Link>
-            <HeaderMenuText>Menu</HeaderMenuText>
+            <HeaderMenuText highlight={page === 'menu'}>Menu</HeaderMenuText>
             <Link href='/promotion'>
-              <HeaderMenuText>Promotions</HeaderMenuText>
+              <HeaderMenuText highlight={page === 'promotion'}>Promotions</HeaderMenuText>
             </Link>
-            <HeaderMenuText>Store information</HeaderMenuText>
+            <HeaderMenuText highlight={page === 'stores'}>Store information</HeaderMenuText>
           </HeaderMenu>
           <HambugerMenu onClick={this.toggleMobileMenu} />
         </StyledSection.Container>
         <MobileMenu show={showMobileMenu}>
-          <Link href='/' as='index'>
-            <MobileMenuText>Home</MobileMenuText>
+          <Link href='/'>
+            <HeaderMenuText highlight={page === 'index'}>Home</HeaderMenuText>
           </Link>
-          <MobileMenuText>Menu</MobileMenuText>
+          <HeaderMenuText>Menu</HeaderMenuText>
           <Link href='/promotion'>
-            <MobileMenuText>Promotions</MobileMenuText>
+            <HeaderMenuText highlight={page === 'promotion'}>Promotions</HeaderMenuText>
           </Link>
-          <MobileMenuText>Store information</MobileMenuText>
+          <HeaderMenuText>Store information</HeaderMenuText>
         </MobileMenu>
       </StyledSection>
     )
