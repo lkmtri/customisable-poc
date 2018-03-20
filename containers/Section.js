@@ -1,5 +1,6 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import withRouter from 'decorators/withRouter'
 import { actions, storeKeys } from 'redux-store'
 import sectionComponents from 'components/sections'
 
@@ -14,7 +15,7 @@ const connectedSectionComponent = sectionComponents.reduce(
       return { ...ownProps, ...props, ...customisationProps }
     }
     const mapDispatchToProps = (dispatch) => bindActionCreators(storeKeysToSubscribe.reduce((acc, storeKey) => ({ ...acc, ...actions[storeKey] }), {}), dispatch)
-    const connectedComponent = connect(mapStateToProps, mapDispatchToProps)(component)
+    const connectedComponent = connect(mapStateToProps, mapDispatchToProps)(withRouter(component))
     connectedComponent.schema = component.schema
     return {
       ...acc,

@@ -79,17 +79,17 @@ class Header extends React.PureComponent {
   render () {
     const { customisation } = this.props
     const { showMobileMenu } = this.state
-
+    console.log(this.props)
     return (
       <StyledSection>
         <StyledSection.Container>
           <Logo>{customisation.settings.logo || 'page'}</Logo>
           <HeaderMenu>
-            <Link href='/' as='index'>
+            <Link href='/'>
               <HeaderMenuText>Home</HeaderMenuText>
             </Link>
             <HeaderMenuText>Menu</HeaderMenuText>
-            <Link href='/promotion' as='promotion'>
+            <Link href='/promotion'>
               <HeaderMenuText>Promotions</HeaderMenuText>
             </Link>
             <HeaderMenuText>Store information</HeaderMenuText>

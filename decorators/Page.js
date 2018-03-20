@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { ThemeProvider } from 'styled-components'
 import FlipMove from 'react-flip-move'
 import withRedux from 'decorators/withRedux'
+import { RouterProvider } from 'decorators/withRouter'
 import { getPageSections } from 'tools/customisation'
 import { actions, storeKeys } from 'redux-store'
 import FrameConnector from 'containers/FrameConnector'
@@ -20,29 +21,32 @@ const createPage = (PageComponent) =>
         await context.store.dispatch(actions[storeKeys.customisation].loadThemeAndSectionSettings())
         return {
           ...initialProps,
+          query: context.query,
           currentPage: context.query.page,
           customisation: context.store.getState()[storeKeys.customisation].toJS()
         }
       }
 
       render () {
-        const { currentPage = 'index', customisation } = this.props
+        const { query, currentPage = 'index', customisation } = this.props
         const { sectionSettingData, themeSettingData } = customisation
         const HeaderSection = Section.header
         const FooterSection = Section.footer
 
         return (
           <ThemeProvider theme={themeSettingData}>
-            <FrameConnector>
-              <HeaderSection id='header' {...sectionSettingData.sections.header.settings} />
-              <FlipMove duration={350} easing='ease-out'>
-                {getPageSections(currentPage, sectionSettingData).map(section => {
-                  const SectionComponent = Section[section.type]
-                  return <SectionComponent id={section.key} key={section.key} {...section.settings} />
-                })}
-              </FlipMove>
-              <FooterSection id='footer' {...sectionSettingData.sections.footer.settings} />
-            </FrameConnector>
+            <RouterProvider query={query}>
+              <FrameConnector>
+                <HeaderSection id='header' {...sectionSettingData.sections.header.settings} />
+                <FlipMove duration={350} easing='ease-out'>
+                  {getPageSections(currentPage, sectionSettingData).map(section => {
+                    const SectionComponent = Section[section.type]
+                    return <SectionComponent id={section.key} key={section.key} {...section.settings} />
+                  })}
+                </FlipMove>
+                <FooterSection id='footer' {...sectionSettingData.sections.footer.settings} />
+              </FrameConnector>
+            </RouterProvider>
           </ThemeProvider>
         )
       }
