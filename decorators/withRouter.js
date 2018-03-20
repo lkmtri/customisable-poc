@@ -14,6 +14,10 @@ class Route {
 
   subscribe (f) {
     this.subscriptions.push(f)
+    return () => {
+      const idx = this.subscriptions.findIndex(e => e === f)
+      idx >= 0 && this.subscriptions.splice(idx, 1)
+    }
   }
 }
 
@@ -58,7 +62,6 @@ export default (WrappedComponent) =>
 
     constructor (props, context) {
       super(props, context)
-      console.log('context', context.route)
       this.state = {
         route: context.route
       }

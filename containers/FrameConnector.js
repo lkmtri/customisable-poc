@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Router } from 'routes'
+import withRouter from 'decorators/withRouter'
 import {
   themeSettingSchema,
   themeSettingData,
@@ -10,34 +11,43 @@ import {
 
 class FrameConnector extends React.PureComponent {
   componentDidMount () {
-    if (window !== undefined) {
-      window.parent.postMessage({
-        type: '@@customisation/LOAD_THEME',
-        payload: {
-          themeSettingSchema,
-          themeSettingData,
-          sectionSettingSchema,
-          sectionSettingData
-        }
-      }, 'http://localhost:3000')
-
-      const { dispatch } = this.props
-
-      window.addEventListener('message', function (event) {
-        dispatch(event.data)
-      })
-
-      Router.onRouteChangeComplete = (url) => {
-        console.log(url)
-        if (url.startsWith('/')) {
-          url = url.substr(1)
-          if (url === '') url = 'index'
-        }
-        window.parent.postMessage({
-          type: '@@preview/UPDATE_NEXT_FRAME_URL',
-          payload: url
-        }, 'http://localhost:3000')
+    this.listenForMessageFromParentFrame()
+    this.listenForRouteChange()
+    this.sendMessageToParentFrame({
+      type: '@@customisation/LOAD_THEME',
+      payload: {
+        themeSettingSchema,
+        themeSettingData,
+        sectionSettingSchema,
+        sectionSettingData
       }
+    })
+  }
+
+  listenForRouteChange = () => {
+    Router.onRouteChangeComplete = (url) => {
+      if (url.startsWith('/')) {
+        url = url.substr(1)
+        if (url === '') url = 'index'
+      }
+      this.sendMessageToParentFrame({
+        type: '@@preview/UPDATE_NEXT_FRAME_URL',
+        payload: url
+      })
+    }
+  }
+
+  listenForMessageFromParentFrame = () => {
+    const { dispatch } = this.props
+    window !== undefined && window.addEventListener('message', function (event) {
+      dispatch(event.data)
+    })
+  }
+
+  sendMessageToParentFrame = (message) => {
+    const { route } = this.props
+    if (route.preview && window !== undefined) {
+      window.parent.postMessage(message, 'http://localhost:3000')
     }
   }
 
@@ -46,4 +56,4 @@ class FrameConnector extends React.PureComponent {
   }
 }
 
-export default connect()(FrameConnector)
+export default connect()(withRouter(FrameConnector))

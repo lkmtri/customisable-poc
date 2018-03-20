@@ -79,7 +79,7 @@ class Header extends React.PureComponent {
   render () {
     const { customisation } = this.props
     const { showMobileMenu } = this.state
-    console.log(this.props)
+
     return (
       <StyledSection>
         <StyledSection.Container>
