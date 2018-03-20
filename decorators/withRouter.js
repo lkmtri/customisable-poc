@@ -55,6 +55,8 @@ export class RouterProvider extends React.PureComponent {
 }
 
 export default (WrappedComponent) =>
+  // Must extends from React.Component instead of React.PureComponent here
+  // Reason: this.setState({ route }) always has route as the same Route instance
   class RouterSubsription extends React.Component {
     static contextTypes = {
       route: PropTypes.object

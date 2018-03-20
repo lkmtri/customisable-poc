@@ -38,7 +38,8 @@ class FrameConnector extends React.PureComponent {
   }
 
   listenForMessageFromParentFrame = () => {
-    const { dispatch } = this.props
+    const { dispatch, route } = this.props
+    if (!route.preview) return
     window !== undefined && window.addEventListener('message', function (event) {
       dispatch(event.data)
     })

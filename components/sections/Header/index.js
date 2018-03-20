@@ -32,7 +32,7 @@ const HeaderMenu = styled.div`
 const HeaderMenuText = styled(TextStyle)`
   padding-left: 1rem;
   cursor: pointer;
-  color: ${props => props.highlight ? '#fff' : '#c9efde'};
+  color: ${props => props.displaying ? '#fff' : '#c9efde'};
   ${media.mobile`margin: 0.3rem;`}
 `
 
@@ -74,9 +74,8 @@ class Header extends React.PureComponent {
   toggleMobileMenu = () => this.setState({ showMobileMenu: !this.state.showMobileMenu })
 
   render () {
-    const { customisation, route } = this.props
+    const { customisation } = this.props
     const { showMobileMenu } = this.state
-    const { page = 'index' } = route
 
     return (
       <StyledSection>
@@ -84,23 +83,23 @@ class Header extends React.PureComponent {
           <Logo>{customisation.settings.logo || 'page'}</Logo>
           <HeaderMenu>
             <Link href='/'>
-              <HeaderMenuText highlight={page === 'index'}>Home</HeaderMenuText>
+              <HeaderMenuText>Home</HeaderMenuText>
             </Link>
-            <HeaderMenuText highlight={page === 'menu'}>Menu</HeaderMenuText>
+            <HeaderMenuText>Menu</HeaderMenuText>
             <Link href='/promotion'>
-              <HeaderMenuText highlight={page === 'promotion'}>Promotions</HeaderMenuText>
+              <HeaderMenuText>Promotions</HeaderMenuText>
             </Link>
-            <HeaderMenuText highlight={page === 'stores'}>Store information</HeaderMenuText>
+            <HeaderMenuText>Store information</HeaderMenuText>
           </HeaderMenu>
           <HambugerMenu onClick={this.toggleMobileMenu} />
         </StyledSection.Container>
         <MobileMenu show={showMobileMenu}>
           <Link href='/'>
-            <HeaderMenuText highlight={page === 'index'}>Home</HeaderMenuText>
+            <HeaderMenuText>Home</HeaderMenuText>
           </Link>
           <HeaderMenuText>Menu</HeaderMenuText>
           <Link href='/promotion'>
-            <HeaderMenuText highlight={page === 'promotion'}>Promotions</HeaderMenuText>
+            <HeaderMenuText>Promotions</HeaderMenuText>
           </Link>
           <HeaderMenuText>Store information</HeaderMenuText>
         </MobileMenu>
