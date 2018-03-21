@@ -8,9 +8,9 @@ const connectedSectionComponent = sectionComponents.reduce(
   (acc, component) => {
     const storeKeysToSubscribe = component.storeKeysToSubscribe
     const mapStateToProps = (state, ownProps) => {
-      const props = component.storeKeysToSubscribe.reduce((acc, storeKey) => ({ ...acc, [storeKey]: state[storeKey].toJS() }), {})
+      const props = component.storeKeysToSubscribe.reduce((acc, storeKey) => ({ ...acc, [storeKey]: state[storeKey] }), {})
       const customisationProps = {
-        customisation: state[storeKeys.customisation].toJS().sectionSettingData.sections[ownProps.id]
+        customisation: state[storeKeys.customisation].sectionSettingData.sections[ownProps.id]
       }
       return { ...ownProps, ...props, ...customisationProps }
     }

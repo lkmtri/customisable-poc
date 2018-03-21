@@ -10,7 +10,7 @@ import FrameConnector from 'containers/FrameConnector'
 import Section from 'containers/Section'
 
 const createPage = (PageComponent) =>
-  connect((state) => ({ customisation: state[storeKeys.customisation].toJS() }))(
+  connect((state) => ({ customisation: state[storeKeys.customisation] }))(
     class Page extends React.PureComponent {
       // Load common resources for pages here
       static async getInitialProps (context) {
@@ -18,12 +18,17 @@ const createPage = (PageComponent) =>
           ? await PageComponent.getInitialProps(context)
           : {}
         // Load theme to the redux store
-        await context.store.dispatch(actions[storeKeys.customisation].loadThemeAndSectionSettings())
+        const { preview: previewToken } = context.query
+        if (previewToken) {
+          await context.store.dispatch(actions[storeKeys.customisation].loadPreviewThemeAction({ previewToken }))
+        } else {
+          await context.store.dispatch(actions[storeKeys.customisation].loadThemeAction({ merchantId: '12345' }))
+        }
+
         return {
           ...initialProps,
-          query: context.query,
           currentPage: context.query.page,
-          customisation: context.store.getState()[storeKeys.customisation].toJS()
+          customisation: context.store.getState()[storeKeys.customisation]
         }
       }
 

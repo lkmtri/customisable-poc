@@ -1,10 +1,17 @@
-import { LOAD_THEME_AND_SECTION_SETTINGS, HOT_UPDATE_THEME_AND_SECTION_SETTINGS } from './constants'
+import { asyncAction } from 'tools/redux'
+import { loadPreviewTheme, loadTheme } from 'api/theme'
+import * as C from './constants'
 
-export const loadThemeAndSectionSettings = () => ({
-  type: LOAD_THEME_AND_SECTION_SETTINGS
+export const loadThemeAction = asyncAction({
+  api: loadTheme,
+  requestAction: C.LOAD_THEME_REQUEST,
+  successAction: C.LOAD_THEME_SUCCESS,
+  failureAction: C.LOAD_THEME_FAILURE
 })
 
-export const hotUpdateThemeAndSectionSettings = (payload) => ({
-  type: HOT_UPDATE_THEME_AND_SECTION_SETTINGS,
-  payload
+export const loadPreviewThemeAction = asyncAction({
+  api: loadPreviewTheme,
+  requestAction: C.LOAD_PREVIEW_THEME_REQUEST,
+  successAction: C.LOAD_PREVIEW_THEME_SUCCESS,
+  failureAction: C.LOAD_PREVIEW_THEME_FAILURE
 })
