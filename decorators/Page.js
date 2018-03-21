@@ -19,7 +19,7 @@ const createPage = (PageComponent) =>
         const initialProps = typeof PageComponent.getInitialProps === 'function'
           ? await PageComponent.getInitialProps(context)
           : {}
-        // Load theme to the redux store
+        // Load theme to the redux store (on server only)
         const { preview: previewToken } = context.query
         if (previewToken) {
           isServer && await context.store.dispatch(actions[storeKeys.customisation].loadPreviewThemeAction({ previewToken }))
