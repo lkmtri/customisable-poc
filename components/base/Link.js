@@ -8,12 +8,34 @@ class Link extends React.PureComponent {
     query: {}
   }
 
+  componentDidMount () {
+    const { prefetch } = this.props
+    prefetch && this.prefetchRoute()
+  }
+
+  prefetchRoute = () => {
+    const url = this.constructUrl()
+    Router.prefetchRoute(url)
+  }
+
   constructUrl = () => {
-    const { href, query } = this.props
-    const queries = Object.keys(query)
-    return queries.length === 0
+    const { href, query, route } = this.props
+    // preserve preview querystring
+    if (route.preview) query.preview = route.preview
+    let queries = query
+    if (typeof query === 'function') {
+      route.page && delete route.page
+      route.param && delete route.param
+      queries = query(route)
+    }
+    const queriesKeys = Object.keys(queries)
+    return queriesKeys.length === 0
       ? href
-      : queries.reduce((acc, key, idx) => `${acc}${idx !== 0 ? '&' : ''}${key}=${query[key]}`, `${href}?`)
+      : queriesKeys.reduce(
+        // remove undefined querystring from url
+        (acc, key, idx) => queries[key] !== undefined ? `${acc}${idx !== 0 ? '&' : ''}${key}=${queries[key]}` : acc,
+        `${href}?`
+      )
   }
 
   handleOnClick = () => {
