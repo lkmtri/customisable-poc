@@ -9,6 +9,8 @@ import { actions, storeKeys } from 'redux-store'
 import FrameConnector from 'containers/FrameConnector'
 import Section from 'containers/Section'
 
+const isServer = typeof window === 'undefined'
+
 const createPage = (PageComponent) =>
   connect((state) => ({ customisation: state[storeKeys.customisation] }))(
     class Page extends React.PureComponent {
@@ -20,9 +22,9 @@ const createPage = (PageComponent) =>
         // Load theme to the redux store
         const { preview: previewToken } = context.query
         if (previewToken) {
-          await context.store.dispatch(actions[storeKeys.customisation].loadPreviewThemeAction({ previewToken }))
+          isServer && await context.store.dispatch(actions[storeKeys.customisation].loadPreviewThemeAction({ previewToken }))
         } else {
-          await context.store.dispatch(actions[storeKeys.customisation].loadThemeAction({ merchantId: '12345' }))
+          isServer && await context.store.dispatch(actions[storeKeys.customisation].loadThemeAction({ merchantId: '12345' }))
         }
 
         return {

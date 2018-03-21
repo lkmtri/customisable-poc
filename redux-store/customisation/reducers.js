@@ -40,7 +40,6 @@ export const reducers = (state = initialState, action) => {
     case C.LOAD_THEME_SUCCESS:
       return produce(state, draftState => {
         const { themeData, themeSchema } = action.payload
-        console.log(action.payload)
         draftState.themeSettingData = themeData.themeSettings
         draftState.themeSettingSchema = themeSchema.themeSettingSchema
         draftState.sectionSettingData = themeData.sectionSettings
