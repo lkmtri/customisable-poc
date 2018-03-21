@@ -25,14 +25,11 @@ class FrameConnector extends React.PureComponent {
   }
 
   listenForRouteChange = () => {
-    Router.onRouteChangeComplete = (url) => {
-      if (url.startsWith('/')) {
-        url = url.substr(1)
-        if (url === '') url = 'index'
-      }
+    Router.onRouteChangeComplete = () => {
+      const { route } = this.props
       this.sendMessageToParentFrame({
         type: '@@preview/UPDATE_NEXT_FRAME_URL',
-        payload: url
+        payload: route.page || 'index'
       })
     }
   }

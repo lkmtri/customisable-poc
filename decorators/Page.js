@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { ThemeProvider } from 'styled-components'
 import FlipMove from 'react-flip-move'
 import withRedux from 'decorators/withRedux'
-import { RouterProvider } from 'decorators/withRouter'
+import { RouteProvider } from 'decorators/withRouter'
 import { getPageSections } from 'tools/customisation'
 import { actions, storeKeys } from 'redux-store'
 import FrameConnector from 'containers/FrameConnector'
@@ -30,13 +30,13 @@ const createPage = (PageComponent) =>
       render () {
         const { url, customisation } = this.props
         const { sectionSettingData, themeSettingData } = customisation
-        const HeaderSection = Section.header
-        const FooterSection = Section.footer
+        const HeaderSection = Section.header || (() => null)
+        const FooterSection = Section.footer || (() => null)
         const currentPage = url.query.page || 'index'
 
         return (
           <ThemeProvider theme={themeSettingData}>
-            <RouterProvider query={url.query}>
+            <RouteProvider query={url.query}>
               <FrameConnector>
                 <HeaderSection id='header' {...sectionSettingData.sections.header.settings} />
                 <FlipMove duration={350} easing='ease-out'>
@@ -47,7 +47,7 @@ const createPage = (PageComponent) =>
                 </FlipMove>
                 <FooterSection id='footer' {...sectionSettingData.sections.footer.settings} />
               </FrameConnector>
-            </RouterProvider>
+            </RouteProvider>
           </ThemeProvider>
         )
       }
