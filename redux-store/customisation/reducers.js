@@ -46,6 +46,15 @@ export const reducers = (state = initialState, action) => {
           draftState.sectionSettingData.pages[page].concat([id])
         )
       })
+    case C.REMOVE_SECTION:
+      return produce(state, draftState => {
+        const { page, sectionId } = action.payload
+        deepUpdate(
+          draftState,
+          ['sectionSettingData', 'pages', page],
+          draftState.sectionSettingData.pages[page].filter(e => e !== sectionId)
+        )
+      })
     case C.LOAD_PREVIEW_THEME_SUCCESS:
     case C.LOAD_THEME_SUCCESS:
       return produce(state, draftState => {
