@@ -2,26 +2,11 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Router } from 'routes'
 import withRouter from 'decorators/withRouter'
-import {
-  themeSettingSchema,
-  themeSettingData,
-  sectionSettingSchema,
-  sectionSettingData
-} from 'theme-config'
 
 class FrameConnector extends React.PureComponent {
   componentDidMount () {
     this.listenForMessageFromParentFrame()
     this.listenForRouteChange()
-    this.sendMessageToParentFrame({
-      type: '@@customisation/LOAD_THEME',
-      payload: {
-        themeSettingSchema,
-        themeSettingData,
-        sectionSettingSchema,
-        sectionSettingData
-      }
-    })
   }
 
   listenForRouteChange = () => {

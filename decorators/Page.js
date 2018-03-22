@@ -29,7 +29,6 @@ const createPage = (PageComponent) =>
 
         return {
           ...initialProps,
-          currentPage: context.query.page,
           customisation: context.store.getState()[storeKeys.customisation]
         }
       }
