@@ -11,6 +11,8 @@ import Section from 'containers/Section'
 
 const isServer = typeof window === 'undefined'
 
+const safeComponent = (Component) => Component || (() => null)
+
 const createPage = (PageComponent) =>
   connect((state) => ({ customisation: state[storeKeys.customisation] }))(
     class Page extends React.PureComponent {
@@ -36,8 +38,8 @@ const createPage = (PageComponent) =>
       render () {
         const { url, customisation } = this.props
         const { sectionSettingData, themeSettingData } = customisation
-        const HeaderSection = Section.header || (() => null)
-        const FooterSection = Section.footer || (() => null)
+        const HeaderSection = safeComponent(Section.header)
+        const FooterSection = safeComponent(Section.footer)
         const currentPage = url.query.page || 'index'
 
         return (
@@ -47,7 +49,7 @@ const createPage = (PageComponent) =>
                 <HeaderSection id='header' {...sectionSettingData.sections.header.settings} />
                 <FlipMove duration={350} easing='ease-out'>
                   {getPageSections(currentPage, sectionSettingData).map(section => {
-                    const SectionComponent = Section[section.type]
+                    const SectionComponent = safeComponent(Section[section.type])
                     return <SectionComponent id={section.key} key={section.key} {...section.settings} />
                   })}
                 </FlipMove>
