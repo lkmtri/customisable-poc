@@ -2,10 +2,10 @@ FROM node:latest
 
 EXPOSE 3001
 
-RUN mkdir -p /frontend
-WORKDIR /frontend
+RUN mkdir -p /site
+WORKDIR /site
 
-COPY . /frontend
+COPY . /site
 
 RUN npm install
 

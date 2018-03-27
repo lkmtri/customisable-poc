@@ -6,7 +6,7 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "dev": "node index.js",
+    "dev": "nodemon index.js 'standard && node'",
     "build": "next build",
     "start": "next start"
   },
@@ -43,6 +43,9 @@
     "stylelint-processor-styled-components": "^1.2.2",
     "uuid": "^3.2.1"
   },
+  "devDependencies": {
+    "nodemon": "^1.17.2"
+  },
   "babel": {
     "plugins": [
       [
@@ -57,8 +60,7 @@
         "module-resolver",
         {
           "root": [
-            "./",
-            "../"
+            "./"
           ]
         }
       ]
@@ -87,5 +89,17 @@
       "no-empty-source": null
     },
     "syntax": "scss"
+  },
+  "nodemonConfig": {
+    "verbose": true,
+    "ignore": [
+      ".next/",
+      "*.log",
+      ".git/*",
+      "node_modules/*",
+      "decorators/*",
+      "pages/*",
+      "static/*"
+    ]
   }
 }

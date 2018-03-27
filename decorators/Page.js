@@ -4,6 +4,7 @@ import { ThemeProvider } from 'styled-components'
 import FlipMove from 'react-flip-move'
 import withRedux from 'decorators/withRedux'
 import { RouteProvider } from 'decorators/withRouter'
+import { isArray } from 'tools/array'
 import { getPageSections } from 'tools/customisation'
 import { actions, storeKeys } from 'redux-store'
 import FrameConnector from 'containers/FrameConnector'
@@ -23,6 +24,7 @@ const createPage = (PageComponent) =>
           : {}
         // Load theme to the redux store (on server only)
         const { preview: previewToken } = context.query
+        console.log(previewToken)
         if (previewToken) {
           isServer && await context.store.dispatch(actions[storeKeys.customisation].loadPreviewThemeAction({ previewToken }))
         } else {
@@ -35,12 +37,20 @@ const createPage = (PageComponent) =>
         }
       }
 
+      getPageSections = () => {
+        const { url, customisation } = this.props
+        const { sectionSettingData } = customisation
+        const currentPath = isArray(url.query.path) ? url.query.path : [url.query.path]
+        const currentPage = currentPath[0] || 'index'
+        return getPageSections(currentPage, sectionSettingData) || []
+      }
+
       render () {
         const { url, customisation } = this.props
         const { sectionSettingData, themeSettingData } = customisation
         const HeaderSection = safeComponent(Section.header)
         const FooterSection = safeComponent(Section.footer)
-        const currentPage = url.query.page || 'index'
+        const pageSections = this.getPageSections()
 
         return (
           <ThemeProvider theme={themeSettingData}>
@@ -48,7 +58,7 @@ const createPage = (PageComponent) =>
               <FrameConnector>
                 <HeaderSection id='header' {...sectionSettingData.sections.header.settings} />
                 <FlipMove duration={350} easing='ease-out'>
-                  {getPageSections(currentPage, sectionSettingData).map(section => {
+                  {pageSections.map(section => {
                     const SectionComponent = safeComponent(Section[section.type])
                     return <SectionComponent id={section.key} key={section.key} {...section.settings} />
                   })}

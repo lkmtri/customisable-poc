@@ -1,62 +1,52 @@
 import React from 'react'
-import { Router } from 'routes'
+import NextLink from 'next/link'
 import withRouter from 'decorators/withRouter'
 
 class Link extends React.PureComponent {
   static defaultProps = {
-    onClick: () => {},
     query: {}
   }
 
-  componentDidMount () {
-    const { prefetch } = this.props
-    prefetch && this.prefetchRoute()
-  }
+  static preservedQuery = [
+    'locale',
+    'preview'
+  ]
 
-  prefetchRoute = () => {
-    const url = this.constructUrl()
-    Router.prefetchRoute(url)
-  }
-
-  constructUrl = () => {
-    const { href, query, route } = this.props
-    // preserve preview querystring
-    if (route.preview) query.preview = route.preview
-    let queries = query
-    if (typeof query === 'function') {
-      route.page && delete route.page
-      route.param && delete route.param
-      queries = query(route)
-    }
-    const queriesKeys = Object.keys(queries)
-    return queriesKeys.length === 0
-      ? href
-      : queriesKeys.reduce(
-        // remove undefined querystring from url
-        (acc, key, idx) => queries[key] !== undefined ? `${acc}${idx !== 0 ? '&' : ''}${key}=${queries[key]}` : acc,
-        `${href}?`
-      )
-  }
-
-  handleOnClick = () => {
-    const url = this.constructUrl()
-    Router.pushRoute(url)
-  }
-
-  getCurrentPath = () => {
+  getHref = () => {
+    const { href, query } = this.props
     const { route } = this.props
-    const { page = '', param } = route
-    return `/${page}${param ? `/${param}` : ''}`
+    const path = href.split('/').filter(e => e !== '')
+    const prevQuery = Link.preservedQuery.reduce((acc, cur) => {
+      acc[cur] = route[cur]
+      return acc
+    }, {})
+    const res = {
+      pathname: '/',
+      query: {
+        ...prevQuery,
+        ...query,
+        path
+      }
+    }
+    return res
+  }
+
+  getAsHref = () => {
+    const { href, query } = this.props
+    const { route } = this.props
+    const nextQuery = typeof query === 'function' ? query(route) : query
+    const locale = nextQuery.locale || 'en_SG'
+    return `/${locale}${href}`
   }
 
   render () {
-    const { children, href } = this.props
-    const childrenWithProps = React.Children.map(children, child =>
-      React.cloneElement(child, { onClick: this.handleOnClick, displaying: this.getCurrentPath() === href }))
+    const href = this.getHref()
+    const asHref = this.getAsHref()
+
     return (
-      <React.Fragment>
-        {childrenWithProps}
-      </React.Fragment>
+      <NextLink {...this.props} href={href} as={asHref}>
+        {this.props.children}
+      </NextLink>
     )
   }
 }

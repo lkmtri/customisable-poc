@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Router } from 'routes'
+import Router from 'next/router'
 import withRouter from 'decorators/withRouter'
 
 class FrameConnector extends React.PureComponent {
