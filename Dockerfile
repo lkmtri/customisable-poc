@@ -13,7 +13,7 @@ COPY . /site
 
 RUN npm install
 
-CMD if [${APP_ENV} = docker] ; then \
+CMD if [ ${APP_ENV} = docker ] ; then \
   npm run build && \
   npm run start; \
   else \
