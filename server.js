@@ -1,9 +1,10 @@
-const express = require('express')
-const next = require('next')
-const LRUCache = require('lru-cache')
+import express from 'express'
+import next from 'next'
+import LRUCache from 'lru-cache'
+import config from 'config'
 
-const port = 3001
-const dev = process.env.NODE_ENV !== 'production'
+const port = config.port
+const dev = process.env.NODE_ENV === 'development'
 const app = next({ dir: '.', dev })
 const handle = app.getRequestHandler()
 
@@ -80,6 +81,6 @@ app.prepare().then(() => {
 
   server.listen(port, (err) => {
     if (err) throw err
-    console.log(`> Ready on http://localhost:${port}`)
+    console.log(`> Ready on ${config.fescBaseUrl}:${port}`)
   })
 })

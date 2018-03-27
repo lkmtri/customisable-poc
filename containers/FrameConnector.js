@@ -2,6 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Router from 'next/router'
 import withRouter from 'decorators/withRouter'
+import config from 'config'
+import { isArray } from 'tools/array'
 
 class FrameConnector extends React.PureComponent {
   componentDidMount () {
@@ -12,9 +14,10 @@ class FrameConnector extends React.PureComponent {
   listenForRouteChange = () => {
     Router.onRouteChangeComplete = () => {
       const { route } = this.props
+      const path = isArray(route.path) ? route.path : [route.path]
       this.sendMessageToParentFrame({
         type: '@@preview/UPDATE_NEXT_FRAME_URL',
-        payload: route.page || 'index'
+        payload: path[0] || 'index'
       })
     }
   }
@@ -30,7 +33,7 @@ class FrameConnector extends React.PureComponent {
   sendMessageToParentFrame = (message) => {
     const { route } = this.props
     if (route.preview && window !== undefined) {
-      window.parent.postMessage(message, 'http://oms.localhost')
+      window.parent.postMessage(message, config.customisationUIBaseUrl)
     }
   }
 
