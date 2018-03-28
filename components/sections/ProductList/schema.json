@@ -1,0 +1,53 @@
+{
+    "name": "Product List",
+    "category": "Product",
+    "type": "product_list",
+    "settings": [
+        {
+            "type": "radio",
+            "id": "product_list_mode",
+            "label": "Choose list or grid view",
+            "default": [
+                "grid"
+            ],
+            "options": [
+                {
+                    "value": "grid",
+                    "label": "Show products in grid view"
+                },
+                {
+                    "value": "list",
+                    "label": "Show products in list view"
+                }
+            ]
+        }
+    ],
+    "blocks": [
+        {
+            "type": "product_item",
+            "name": "Product Item",
+            "settings": [
+                {
+                    "type": "textarea",
+                    "id": "content",
+                    "label": "Content",
+                    "default": "Great quality. Easy to use. Nice UI. Definitely made my life easier."
+                },
+                {
+                    "type": "text",
+                    "id": "author",
+                    "label": "Customer name",
+                    "default": "John Albert"
+                }
+            ]
+        }
+    ],
+    "presets": {
+        "name": "Product List",
+        "blocks": [
+            {
+                "type": "product_item"
+            }
+        ]
+    }
+}

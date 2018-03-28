@@ -7,8 +7,6 @@ const baseConfig = {
 
 let envConfig = {}
 
-console.log(process.env.APP_ENV)
-
 switch (process.env.APP_ENV) {
   case 'docker':
     envConfig = dockerConfig

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { media } from 'tools/styled'
 import Section from 'components/base/Section'
 import { DisplayText, Subheading, TextStyle } from 'components/base/Typo'
-import schema from './schema'
+import schema from './schema.json'
 
 const HeadingContainer = styled.div`
   display: flex;

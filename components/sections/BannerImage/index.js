@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { media } from 'tools/styled'
 import Section from 'components/base/Section'
-import schema from './schema'
+import schema from './schema.json'
 
 const Image = styled.img`
   width: 100%;

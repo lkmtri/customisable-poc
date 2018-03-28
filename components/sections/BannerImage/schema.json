@@ -1,0 +1,13 @@
+{
+    "name": "Banner Image",
+    "type": "banner_image",
+    "settings": [
+        {
+            "type": "text",
+            "id": "image",
+            "label": "Upload an image",
+            "default": "https://images.pexels.com/photos/258136/pexels-photo-258136.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+        }
+    ],
+    "presets": {}
+}

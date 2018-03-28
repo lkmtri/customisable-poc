@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Section from 'components/base/Section'
 import { DisplayText, Subheading, TextStyle } from 'components/base/Typo'
-import schema from './schema'
+import schema from './schema.json'
 
 const PromotionContainer = styled(Section.Container)`
   padding: 0 0 50px 0;

@@ -4,7 +4,7 @@ import LRUCache from 'lru-cache'
 import config from 'config'
 
 const port = config.port
-const dev = process.env.NODE_ENV === 'development'
+const dev = process.env.NODE_ENV === 'dev'
 const app = next({ dir: '.', dev })
 const handle = app.getRequestHandler()
 
@@ -32,7 +32,7 @@ const renderAndCache = (req, res, pagePath, queryParams) => {
 
   // If we have a page in the cache, let's serve it
   if (ssrCache.has(key)) {
-    console.log(`CACHE HIT: ${key}`)
+    // console.log(`CACHE HIT: ${key}`)
     res.send(ssrCache.get(key))
     return
   }
@@ -42,7 +42,7 @@ const renderAndCache = (req, res, pagePath, queryParams) => {
     .renderToHTML(req, res, pagePath, queryParams)
     .then((html) => {
     // Let's cache this page
-      console.log(`CACHE MISS: ${key}`)
+      // console.log(`CACHE MISS: ${key}`)
       ssrCache.set(key, html)
 
       res.send(html)
@@ -74,7 +74,7 @@ app.prepare().then(() => {
       renderAndCache(req, res, '/', { path, locale, ...query })
     } else {
       // Don't load from cache for preview pages
-      console.log('render without cache:', url)
+      // console.log('render without cache:', url)
       render(req, res, '/', { path, locale, ...query })
     }
   })

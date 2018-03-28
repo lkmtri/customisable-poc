@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { media } from 'tools/styled'
 import Section from 'components/base/Section'
 import ProductCard from 'components/snippets/ProductCard'
-import schema from './schema'
+import schema from './schema.json'
 
 const StyledProductCard = styled(ProductCard)`
   width: 30%;

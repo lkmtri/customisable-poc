@@ -1,0 +1,14 @@
+{
+    "name": "Headers",
+    "type": "header",
+    "settings": [
+        {
+            "type": "text",
+            "id": "logo",
+            "label": "Logo",
+            "default": "DEFAULT LOGO"
+        }
+    ],
+    "blocks": [],
+    "presets": {}
+}

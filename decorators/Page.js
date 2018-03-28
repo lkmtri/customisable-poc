@@ -7,12 +7,21 @@ import { RouteProvider } from 'decorators/withRouter'
 import { isArray } from 'tools/array'
 import { getPageSections } from 'tools/customisation'
 import { actions, storeKeys } from 'redux-store'
+import SocketConnector from 'containers/SocketConnector'
 import FrameConnector from 'containers/FrameConnector'
 import Section from 'containers/Section'
 
 const isServer = typeof window === 'undefined'
 
 const safeComponent = (Component) => Component || (() => null)
+
+const ExternalConnectors = ({ children }) => (
+  <SocketConnector>
+    <FrameConnector>
+      {children}
+    </FrameConnector>
+  </SocketConnector>
+)
 
 const createPage = (PageComponent) =>
   connect((state) => ({ customisation: state[storeKeys.customisation] }))(
@@ -24,7 +33,6 @@ const createPage = (PageComponent) =>
           : {}
         // Load theme to the redux store (on server only)
         const { preview: previewToken } = context.query
-        console.log(previewToken)
         if (previewToken) {
           isServer && await context.store.dispatch(actions[storeKeys.customisation].loadPreviewThemeAction({ previewToken }))
         } else {
@@ -51,11 +59,10 @@ const createPage = (PageComponent) =>
         const HeaderSection = safeComponent(Section.header)
         const FooterSection = safeComponent(Section.footer)
         const pageSections = this.getPageSections()
-
         return (
           <ThemeProvider theme={themeSettingData}>
             <RouteProvider query={url.query}>
-              <FrameConnector>
+              <ExternalConnectors>
                 <HeaderSection id='header' {...sectionSettingData.sections.header.settings} />
                 <FlipMove duration={350} easing='ease-out'>
                   {pageSections.map(section => {
@@ -64,7 +71,7 @@ const createPage = (PageComponent) =>
                   })}
                 </FlipMove>
                 <FooterSection id='footer' {...sectionSettingData.sections.footer.settings} />
-              </FrameConnector>
+              </ExternalConnectors>
             </RouteProvider>
           </ThemeProvider>
         )

@@ -4,7 +4,7 @@ import { media } from 'tools/styled'
 import Link from 'components/base/Link'
 import Section from 'components/base/Section'
 import { DisplayText, TextStyle } from 'components/base/Typo'
-import schema from './schema'
+import schema from './schema.json'
 
 const StyledSection = styled(Section)`
   background-color: #39CCCC;
@@ -17,7 +17,6 @@ StyledSection.Container = styled(Section.Container)`
   justify-content: space-between;
   overflow: hidden;
 `
-
 const Logo = styled(DisplayText)`
   color: white;
   ${media.mobile`font-size: 2.3rem;`}
@@ -83,7 +82,7 @@ class Header extends React.PureComponent {
           <Logo>{customisation.settings.logo || 'page'}</Logo>
           <HeaderMenu>
             <Link href='/'>
-              <HeaderMenuText>Home</HeaderMenuText>
+              <HeaderMenuText>Homee</HeaderMenuText>
             </Link>
             <HeaderMenuText>Menu</HeaderMenuText>
             <Link href='/promotion'>

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Section from 'components/base/Section'
 import { TextStyle } from 'components/base/Typo'
 
-import schema from './schema'
+import schema from './schema.json'
 
 const StyledSection = styled(Section)`
   border-top: 2px #39CCCC solid;
