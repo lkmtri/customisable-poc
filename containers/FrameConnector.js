@@ -26,6 +26,17 @@ class FrameConnector extends React.PureComponent {
     const { dispatch, route } = this.props
     if (!route.preview) return
     window !== undefined && window.addEventListener('message', function (event) {
+      // TODO: Find a better way to change page
+      if (event.data.type === '@@preview/CHANGE_PAGE') {
+        Router.push({
+          pathname: '/',
+          query: {
+            path: [event.data.payload],
+            preview: route.preview
+          }
+        })
+        return
+      }
       dispatch(event.data)
     })
   }
