@@ -19,6 +19,7 @@
     "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.26.0",
     "chokidar": "^2.0.3",
+    "debounce": "^1.1.0",
     "express": "^4.16.3",
     "immer": "^1.2.0",
     "immutable": "^3.8.2",
@@ -102,7 +103,10 @@
       "*.log",
       ".git/*",
       "node_modules/*",
-      "pages/"
+      "pages/",
+      "decorators/",
+      "containers/",
+      "components/"
     ]
   }
 }

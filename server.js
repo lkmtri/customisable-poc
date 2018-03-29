@@ -70,7 +70,7 @@ app.prepare().then(() => {
     path.shift()
 
     // Render from cache
-    if (query.preview === undefined) {
+    if (query.preview === undefined && !dev) {
       renderAndCache(req, res, '/', { path, locale, ...query })
     } else {
       // Don't load from cache for preview pages

@@ -2,9 +2,18 @@ const chokidar = require('chokidar')
 const schemaSource = './components/sections/**/schema.json'
 const axios = require('axios')
 const fs = require('fs')
+const debounce = require('debounce')
 
 const themeMeta = JSON.parse(fs.readFileSync('./theme/meta.json', 'utf8'))
 const themeSettingSchema = JSON.parse(fs.readFileSync('./theme/themeSettingSchema.json', 'utf8'))
+
+const sendUpdateToBackend = debounce(({ themeMeta, themeSettingSchema, sectionSettingSchema }) => {
+  axios.post('http://oms.localhost/api/theme-schema', {
+    themeMeta,
+    themeSettingSchema,
+    sectionSettingSchema
+  })
+}, 1000)
 
 chokidar.watch(schemaSource)
   .on('change', function (path) {
@@ -19,11 +28,7 @@ chokidar.watch(schemaSource)
         files.map(file => {
           sectionSettingSchema.push(JSON.parse(fs.readFileSync(file, 'utf8')))
         })
-        axios.post('http://oms.localhost/api/theme-schema', {
-          themeMeta,
-          themeSettingSchema,
-          sectionSettingSchema
-        })
+        sendUpdateToBackend({ themeMeta, themeSettingSchema, sectionSettingSchema })
       } catch (err) {
         console.log(err)
       }

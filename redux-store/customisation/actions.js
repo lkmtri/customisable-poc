@@ -15,3 +15,8 @@ export const loadPreviewThemeAction = asyncAction({
   successAction: C.LOAD_PREVIEW_THEME_SUCCESS,
   failureAction: C.LOAD_PREVIEW_THEME_FAILURE
 })
+
+export const saveThemeSchemaUpdateAction = ({ themeSettings, themeSettingSchema, sectionSettings, sectionSettingSchema }) => ({
+  type: C.SAVE_THEME_SCHEMA_UPDATE,
+  payload: { themeSettings, themeSettingSchema, sectionSettings, sectionSettingSchema }
+})
