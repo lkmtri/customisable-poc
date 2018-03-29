@@ -7,6 +7,8 @@ import { isArray } from 'tools/array'
 
 class FrameConnector extends React.PureComponent {
   componentDidMount () {
+    // only connect to parent in preview mode
+    if (!this.props.route.preview) return
     this.listenForMessageFromParentFrame()
     this.listenForRouteChange()
   }
@@ -23,22 +25,28 @@ class FrameConnector extends React.PureComponent {
   }
 
   listenForMessageFromParentFrame = () => {
+    window.addEventListener('message', this.dispatchActionFromParentFrame)
+  }
+
+  componentWillUnmount () {
+    if (!this.props.route.preview) return
+    window.removeEventListener('message', this.dispatchActionFromParentFrame)
+  }
+
+  dispatchActionFromParentFrame = (event) => {
     const { dispatch, route } = this.props
-    if (!route.preview) return
-    window !== undefined && window.addEventListener('message', function (event) {
-      // TODO: Find a better way to change page
-      if (event.data.type === '@@preview/CHANGE_PAGE') {
-        Router.push({
-          pathname: '/',
-          query: {
-            path: [event.data.payload],
-            preview: route.preview
-          }
-        })
-        return
-      }
-      dispatch(event.data)
-    })
+    // TODO: Find a better way to change page
+    if (event.data.type === '@@preview/CHANGE_PAGE') {
+      Router.push({
+        pathname: '/',
+        query: {
+          path: [event.data.payload],
+          preview: route.preview
+        }
+      })
+      return
+    }
+    dispatch(event.data)
   }
 
   sendMessageToParentFrame = (message) => {
@@ -49,7 +57,7 @@ class FrameConnector extends React.PureComponent {
   }
 
   render () {
-    return <div>{this.props.children}</div>
+    return <React.Fragment>{this.props.children}</React.Fragment>
   }
 }
 
