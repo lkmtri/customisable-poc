@@ -43,7 +43,6 @@
         }
     ],
     "presets": {
-        "name": "Product List",
         "blocks": [
             {
                 "type": "product_item"

@@ -55,6 +55,11 @@ export const reducers = (state = initialState, action) => {
           draftState.sectionSettingData.pages[page].filter(e => e !== sectionId)
         )
       })
+    case C.ADD_NEW_PAGE:
+      return produce(state, draftState => {
+        const { pageName } = action.payload
+        deepUpdate(draftState, ['sectionSettingData', 'pages', pageName], [])
+      })
     case C.LOAD_PREVIEW_THEME_SUCCESS:
     case C.LOAD_THEME_SUCCESS:
       return produce(state, draftState => {

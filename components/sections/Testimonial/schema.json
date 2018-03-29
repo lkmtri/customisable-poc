@@ -30,8 +30,6 @@
         }
     ],
     "presets": {
-        "name": "Testimonial",
-        "category": "Customer",
         "blocks": [
             {
                 "type": "quote"
