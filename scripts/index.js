@@ -15,7 +15,7 @@ const sendUpdateToBackend = debounce(({ themeMeta, themeSettingSchema, sectionSe
   })
 }, 1000)
 
-const watchForChange = function (path) {
+const onChange = function (path) {
   const glob = require('glob')
   glob(schemaSource, function (e, files) {
     if (e) {
@@ -35,5 +35,6 @@ const watchForChange = function (path) {
 }
 
 chokidar.watch(schemaSource)
-  .on('change', watchForChange)
-  .on('add', watchForChange)
+  .on('change', onChange)
+  .on('add', onChange)
+  .on('unlink', onChange)
