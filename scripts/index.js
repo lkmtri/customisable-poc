@@ -15,22 +15,25 @@ const sendUpdateToBackend = debounce(({ themeMeta, themeSettingSchema, sectionSe
   })
 }, 1000)
 
-chokidar.watch(schemaSource)
-  .on('change', function (path) {
-    const glob = require('glob')
-    glob(schemaSource, function (e, files) {
-      if (e) {
-        console.log(e)
-        return
-      }
-      try {
-        const sectionSettingSchema = []
-        files.map(file => {
-          sectionSettingSchema.push(JSON.parse(fs.readFileSync(file, 'utf8')))
-        })
-        sendUpdateToBackend({ themeMeta, themeSettingSchema, sectionSettingSchema })
-      } catch (err) {
-        console.log(err)
-      }
-    })
+const watchForChange = function (path) {
+  const glob = require('glob')
+  glob(schemaSource, function (e, files) {
+    if (e) {
+      console.log(e)
+      return
+    }
+    try {
+      const sectionSettingSchema = []
+      files.map(file => {
+        sectionSettingSchema.push(JSON.parse(fs.readFileSync(file, 'utf8')))
+      })
+      sendUpdateToBackend({ themeMeta, themeSettingSchema, sectionSettingSchema })
+    } catch (err) {
+      console.log(err)
+    }
   })
+}
+
+chokidar.watch(schemaSource)
+  .on('change', watchForChange)
+  .on('add', watchForChange)

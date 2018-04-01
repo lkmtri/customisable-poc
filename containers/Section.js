@@ -4,14 +4,19 @@ import withRouter from 'decorators/withRouter'
 import { actions, storeKeys } from 'redux-store'
 import sectionComponents from 'components/sections'
 
+const defaultCustomisationProps = {
+  settings: {},
+  blocks: {},
+  blocksOrder: []
+}
+
 const connectedSectionComponent = sectionComponents.reduce(
   (acc, component) => {
     const storeKeysToSubscribe = component.storeKeysToSubscribe
     const mapStateToProps = (state, ownProps) => {
       const props = component.storeKeysToSubscribe.reduce((acc, storeKey) => ({ ...acc, [storeKey]: state[storeKey] }), {})
-      const customisationProps = {
-        customisation: state[storeKeys.customisation].sectionSettingData.sections[ownProps.id]
-      }
+      const customisation = state[storeKeys.customisation].sectionSettingData.sections[ownProps.id] || defaultCustomisationProps
+      const customisationProps = { customisation }
       return { ...ownProps, ...props, ...customisationProps }
     }
     const mapDispatchToProps = (dispatch) => bindActionCreators(storeKeysToSubscribe.reduce((acc, storeKey) => ({ ...acc, ...actions[storeKey] }), {}), dispatch)

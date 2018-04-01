@@ -55,7 +55,7 @@ const createPage = (PageComponent) =>
 
       render () {
         const { url, customisation } = this.props
-        const { sectionSettingData, themeSettingData } = customisation
+        const { themeSettingData } = customisation
         const HeaderSection = safeComponent(Section.header)
         const FooterSection = safeComponent(Section.footer)
         const pageSections = this.getPageSections()
@@ -63,14 +63,14 @@ const createPage = (PageComponent) =>
           <ThemeProvider theme={themeSettingData}>
             <RouteProvider query={url.query}>
               <ExternalConnectors>
-                <HeaderSection id='header' {...sectionSettingData.sections.header.settings} />
+                <HeaderSection id='header' />
                 <FlipMove duration={350} easing='ease-out'>
                   {pageSections.map(section => {
                     const SectionComponent = safeComponent(Section[section.type])
-                    return <SectionComponent id={section.key} key={section.key} {...section.settings} />
+                    return <SectionComponent id={section.key} key={section.key} />
                   })}
                 </FlipMove>
-                <FooterSection id='footer' {...sectionSettingData.sections.footer.settings} />
+                <FooterSection id='footer' />
               </ExternalConnectors>
             </RouteProvider>
           </ThemeProvider>

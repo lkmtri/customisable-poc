@@ -64,18 +64,18 @@ export const reducers = (state = initialState, action) => {
     case C.LOAD_THEME_SUCCESS:
       return produce(state, draftState => {
         const { themeData, themeSchema } = action.payload
-        draftState.themeSettingData = themeData.themeSettings
-        draftState.themeSettingSchema = themeSchema.themeSettingSchema
+        draftState.themeSettingData = themeData.themeSettings || {}
+        draftState.themeSettingSchema = themeSchema.themeSettingSchema || []
         draftState.sectionSettingData = themeData.sectionSettings
-        draftState.sectionSettingSchema = themeSchema.sectionSettingSchema
+        draftState.sectionSettingSchema = themeSchema.sectionSettingSchema || []
       })
     case C.SAVE_THEME_SCHEMA_UPDATE:
       return produce(state, draftState => {
         const { themeSettings, themeSettingSchema, sectionSettings, sectionSettingSchema } = action.payload
-        draftState.themeSettingData = themeSettings
-        draftState.themeSettingSchema = themeSettingSchema
+        draftState.themeSettingData = themeSettings || {}
+        draftState.themeSettingSchema = themeSettingSchema || []
         draftState.sectionSettingData = sectionSettings
-        draftState.sectionSettingSchema = sectionSettingSchema
+        draftState.sectionSettingSchema = sectionSettingSchema || []
       })
     default:
       return state
