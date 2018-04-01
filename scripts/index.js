@@ -5,7 +5,6 @@ const fs = require('fs')
 const debounce = require('debounce')
 
 const themeMeta = JSON.parse(fs.readFileSync('./theme/meta.json', 'utf8'))
-const themeSettingSchema = JSON.parse(fs.readFileSync('./theme/themeSettingSchema.json', 'utf8'))
 
 const sendUpdateToBackend = debounce(({ themeMeta, themeSettingSchema, sectionSettingSchema }) => {
   axios.post('http://oms.localhost/api/theme-schema', {
@@ -27,6 +26,7 @@ const onChange = function (path) {
       files.map(file => {
         sectionSettingSchema.push(JSON.parse(fs.readFileSync(file, 'utf8')))
       })
+      const themeSettingSchema = JSON.parse(fs.readFileSync('./theme/themeSettingSchema.json', 'utf8'))
       sendUpdateToBackend({ themeMeta, themeSettingSchema, sectionSettingSchema })
     } catch (err) {
       console.log(err)
@@ -34,7 +34,12 @@ const onChange = function (path) {
   })
 }
 
+// watch for changes in sections' schema
 chokidar.watch(schemaSource)
   .on('change', onChange)
   .on('add', onChange)
   .on('unlink', onChange)
+
+// watch for changes on themeSettingSchema
+chokidar.watch('./theme/themeSettingSchema.json')
+  .on('change', onChange)
